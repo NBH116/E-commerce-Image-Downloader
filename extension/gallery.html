@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>商品图片</title>
+    <link rel="stylesheet" href="gallery.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-copy">
+        <p class="eyebrow">电商图片提取</p>
+        <h1 id="page-title">商品图片</h1>
+        <p class="source" id="page-source"></p>
+      </div>
+      <div class="actions">
+        <button type="button" id="btn-all">全选</button>
+        <button type="button" id="btn-invert">反选</button>
+        <span class="count" id="selected-count">已选 0</span>
+        <button type="button" class="primary" id="btn-download">下载选中</button>
+      </div>
+    </header>
+
+    <section class="progress" id="progress" hidden>
+      <div class="progress-track">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p id="progress-text">准备下载…</p>
+    </section>
+
+    <section class="result" id="result" hidden></section>
+    <section class="empty" id="empty" hidden>
+      <h2>还没有可展示的图片</h2>
+      <p>
+        请在淘宝、京东或拼多多商品详情页点击「获取图片」。若你正在浏览器中直接打开本页，将显示一组预览卡片用于核对布局。
+      </p>
+      <button type="button" id="btn-demo">载入布局预览</button>
+    </section>
+
+    <main class="grid" id="grid"></main>
+    <script src="gallery.js"></script>
+  </body>
+</html>

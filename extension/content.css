@@ -1,0 +1,39 @@
+.eid-extract-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 88px;
+  z-index: 2147483000;
+  min-width: 112px;
+  height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #10231c;
+  color: #f4fff8;
+  font: 600 14px/1 "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0.04em;
+  box-shadow: 0 10px 28px rgba(16, 35, 28, 0.28);
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.eid-extract-btn:hover {
+  transform: translateY(-2px);
+  background: #17362b;
+  box-shadow: 0 14px 32px rgba(16, 35, 28, 0.36);
+}
+
+.eid-extract-btn:active {
+  transform: translateY(0);
+}
+
+.eid-extract-btn.is-busy,
+.eid-extract-btn:disabled {
+  cursor: progress;
+  opacity: 0.82;
+  transform: none;
+}
+
+.eid-extract-btn.is-empty {
+  background: #5c3b12;
+}

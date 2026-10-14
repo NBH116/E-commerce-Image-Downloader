@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>商品详情 mock · 提取自测</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+        margin: 24px;
+        background: #f4f1ea;
+      }
+      .product img {
+        margin: 8px;
+      }
+      #report {
+        white-space: pre-wrap;
+        background: #111;
+        color: #d6ffd8;
+        padding: 16px;
+        border-radius: 8px;
+      }
+      .bg {
+        width: 240px;
+        height: 180px;
+        background-image: url("../extension/demo/d.png");
+      }
+    </style>
+  </head>
+  <body>
+    <h1>模拟商品详情页</h1>
+    <div class="product">
+      <img src="../extension/demo/a.png" alt="主图" />
+      <img data-src="../extension/demo/b.png" alt="懒加载" width="80" height="80" />
+      <img
+        srcset="../extension/demo/a.png 200w, ../extension/demo/c.png 900w"
+        alt="srcset"
+      />
+      <img src="../extension/demo/logo-icon.png" alt="logo 应过滤" />
+      <img src="../extension/demo/a.png" width="1" height="1" alt="1x1 应过滤" />
+      <img src="https://img.alicdn.com/imgextra/i1/demo.jpg_50x50.jpg" alt="缩略图应过滤或升级" />
+      <div class="bg"></div>
+    </div>
+    <h2>提取报告</h2>
+    <pre id="report">运行中…</pre>
+    <script src="../extension/extract.js"></script>
+    <script>
+      (function () {
+        var api = globalThis.ProductImageExtract;
+        var images = api.collectProductImages(document);
+        var urls = images.map(function (item) {
+          return item.url;
+        });
+        var checks = [];
+        function assert(name, ok) {
+          checks.push((ok ? "PASS" : "FAIL") + "  " + name);
+        }
+        assert("主图被收录", urls.some(function (u) { return /demo\/a\.png/.test(u); }));
+        assert("懒加载 data-src 被收录", urls.some(function (u) { return /demo\/b\.png/.test(u); }));
+        assert("srcset 取较大图", urls.some(function (u) { return /demo\/c\.png/.test(u); }));
+        assert("logo 被过滤", !urls.some(function (u) { return /logo-icon/.test(u); }));
+        assert("背景图被收录", urls.some(function (u) { return /demo\/d\.png/.test(u); }));
+        assert("50x50 缩略被过滤或升级", !urls.some(function (u) { return /_50x50/.test(u); }));
+        assert(
+          "缩略 URL 升级为原图",
+          api.upgradeImageUrl("https://img.alicdn.com/imgextra/i1/demo.jpg_400x400.jpg") ===
+            "https://img.alicdn.com/imgextra/i1/demo.jpg"
+        );
+        document.getElementById("report").textContent =
+          checks.join("\n") +
+          "\n\n共 " +
+          images.length +
+          " 张\n" +
+          urls.join("\n");
+      })();
+    </script>
+  </body>
+</html>
