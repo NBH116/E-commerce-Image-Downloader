@@ -2,7 +2,7 @@
 
 Chrome Manifest V3 扩展：在淘宝、京东、拼多多商品详情页提取商品图，于新标签页勾选后下载为 PNG。
 
-仓库还包含静态展示页 [`website/index.html`](website/index.html)。
+仓库还包含官方宣传网站 [`docs/index.html`](docs/index.html)（图提取 / ImageGrab）。
 
 ## 安装
 
@@ -25,7 +25,7 @@ Chrome Manifest V3 扩展：在淘宝、京东、拼多多商品详情页提取�
 
 - `tests/mock-product.html`：检查提取过滤（页面底部报告应为 PASS）
 - `extension/gallery.html`：点「载入布局预览」核对网格与工具栏
-- `website/index.html`：展示官网
+- `docs/index.html`：官方宣传网站（双击即可打开）
 
 完整下载链路需要在 Chrome 中加载扩展，并在真实详情页操作（登录态、反爬、懒加载滚动无法在此仓库内模拟）。
 
